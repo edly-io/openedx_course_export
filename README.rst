@@ -37,7 +37,7 @@ One Time Setup
   cd openedx_course_export
 
   # Set up a virtualenv using virtualenvwrapper with the same name as the repo and activate it
-  mkvirtualenv -p python3.8 openedx_course_export
+  mkvirtualenv -p python3.5 openedx_course_export
 
 
 Every time you develop something in this repo
