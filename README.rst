@@ -14,9 +14,7 @@ You can install this plugin into any Open edX instance by using the following me
 
 .. code-block::
 
-    # If running devstack in docker, first open a shell in CMS (make studio-shell)
-
-    pip install -e git+https://github.com/edly-io/openedx_course_export.git@0.1.0#egg=openedx_course_export
+    pip install openedx-course-export
 
 
 Configuration
