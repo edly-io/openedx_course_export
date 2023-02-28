@@ -93,7 +93,7 @@ project = 'openedx_course_export'
 copyright = edx_theme.COPYRIGHT  # pylint: disable=redefined-builtin
 author = edx_theme.AUTHOR
 project_title = 'Course Export S3 Plugin'
-documentation_title = f"{project_title}"
+documentation_title = "{}".format(project_title)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
