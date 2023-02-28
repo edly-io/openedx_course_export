@@ -1,7 +1,7 @@
 import boto3
 from django.conf import settings
 
-from ol_openedx_course_export.utils import get_file_name_with_extension
+from openedx_course_export.utils import get_file_name_with_extension
 
 
 class S3Client:
@@ -20,7 +20,7 @@ class S3Client:
 
     def upload_course_s3(self, course_tar, course_id):
         self.client.Bucket(settings.COURSE_IMPORT_EXPORT_BUCKET).put_object(
-            Key=f"{get_file_name_with_extension(course_id)}", Body=course_tar
+            Key=get_file_name_with_extension(course_id), Body=course_tar
         )
 
     def get_bucket_url(self):

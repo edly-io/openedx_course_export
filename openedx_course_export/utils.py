@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from ol_openedx_course_export.constants import AWS_S3_DEFAULT_URL_PREFIX
+from openedx_course_export.constants import AWS_S3_DEFAULT_URL_PREFIX
 
 
 def is_bucket_configuration_valid():
@@ -33,4 +33,4 @@ def get_aws_file_url(course_id):
         str: Returns the S3 specific access URL for the file
     """
 
-    return f"https://{settings.COURSE_IMPORT_EXPORT_BUCKET}.{AWS_S3_DEFAULT_URL_PREFIX}/{get_file_name_with_extension(course_id)}"  # noqa: E501
+    return "https://{}.{}/{}".format(settings.COURSE_IMPORT_EXPORT_BUCKET, AWS_S3_DEFAULT_URL_PREFIX, get_file_name_with_extension(course_id))  # noqa: E501

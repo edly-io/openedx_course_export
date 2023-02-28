@@ -10,7 +10,7 @@ from opaque_keys.edx.keys import CourseKey
 from user_tasks.models import UserTaskStatus
 from xmodule.modulestore.django import modulestore
 
-from ol_openedx_course_export.s3_client import S3Client
+from openedx_course_export.s3_client import S3Client
 
 log = logging.getLogger(__name__)
 
@@ -43,7 +43,7 @@ def task_upload_course_s3(self, user_id, course_key_string):
         self.status.set_state(UserTaskStatus.SUCCEEDED)
     except ClientError as ex:
         log.exception(
-            f"Course export {course_key_string}: A ClientError in course export:"  # noqa: E501, G004
+            "Course export {}: A ClientError in course export:".format(course_key_string)  # noqa: E501, G004
         )
         if self.status.state != UserTaskStatus.FAILED:
             self.status.fail({"raw_error_msg": str(ex)})

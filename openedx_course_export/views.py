@@ -13,8 +13,8 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from user_tasks.models import UserTaskStatus
 
-from ol_openedx_course_export.tasks import task_upload_course_s3
-from ol_openedx_course_export.utils import (
+from openedx_course_export.tasks import task_upload_course_s3
+from openedx_course_export.utils import (
     get_aws_file_url,
     is_bucket_configuration_valid,
 )
@@ -131,7 +131,7 @@ class CourseExportView(CourseImportExportViewMixin, GenericAPIView):
                 upload_task_ids[course_id] = task_detail.task_id
             except Exception as e:
                 log.exception(
-                    f"Course export {course_id}: An error has occurred:"  # noqa: G004
+                    "Course export {}: An error has occurred:".format(course_id)  # noqa: G004
                 )  # noqa: G004, RUF100
                 failed_course_uploads[course_id] = str(e)
 
@@ -145,7 +145,7 @@ class CourseExportView(CourseImportExportViewMixin, GenericAPIView):
             return Response(response_data, status=status.HTTP_200_OK)
         return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
-    @verify_course_exists()
+    @verify_course_exists
     def get(self, request, course_id):
         """
         Check the status of the specified task

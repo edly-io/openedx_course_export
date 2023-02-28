@@ -49,10 +49,10 @@ def load_requirements(*requirements_paths):
             # fine to add constraints to an unconstrained package,
             # raise an error if there are already constraints in place
             if existing_version_constraints and existing_version_constraints != version_constraints:
-                raise BaseException(f'Multiple constraint definitions found for {package}:'
-                                    f' "{existing_version_constraints}" and "{version_constraints}".'
-                                    f'Combine constraints into one location with {package}'
-                                    f'{existing_version_constraints},{version_constraints}.')
+                raise BaseException("Multiple constraint definitions found for {}, {} and {} Combine constraints into one location with {}, {}, {}".format(
+                        package, existing_version_constraints, version_constraints, package, existing_version_constraints, version_constraints,
+                    )
+                )
             if add_if_not_present or package in current_requirements:
                 current_requirements[package] = version_constraints
 
@@ -74,7 +74,7 @@ def load_requirements(*requirements_paths):
                     add_version_constraint_or_raise(line, requirements, False)
 
     # process back into list of pkg><=constraints strings
-    constrained_requirements = [f'{pkg}{version or ""}' for (pkg, version) in sorted(requirements.items())]
+    constrained_requirements = ['{}{}'.format(pkg, version or "") for (pkg, version) in sorted(requirements.items())]
     return constrained_requirements
 
 
@@ -116,9 +116,6 @@ setup(
     include_package_data=True,
     install_requires=load_requirements('requirements/base.in'),
     python_requires=">=3.5",
-    license="AGPL 3.0",
-    zip_safe=False,
-    keywords='Python edx',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Framework :: Django',
@@ -129,4 +126,12 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
     ],
+    entry_points={
+        "cms.djangoapp": [
+            "openedx_course_export = openedx_course_export.apps:CourseExportConfig"
+        ],
+        "lms.djangoapp": [
+            "openedx_course_export = openedx_course_export.apps:CourseExportConfig"
+        ],
+    },
 )
