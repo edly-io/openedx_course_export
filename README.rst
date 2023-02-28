@@ -20,7 +20,7 @@ You can install this plugin into any Open edX instance by using the following me
 
 
 Configuration
-------------
+-------------
 
 **1) edx-platform configuration**
 
